@@ -42,7 +42,7 @@ class MyViewModel : INotifyPropetyChanged
         // handle key up events here
     }
     
-    private void OnKeyUp(object sender, KeyEventArgs e)
+    private void OnKeyDown(object sender, KeyEventArgs e)
     {
         // handle key down events here
     }
