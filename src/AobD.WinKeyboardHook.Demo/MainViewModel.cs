@@ -40,30 +40,26 @@ namespace AobD.WinKeyboardHook.Demo
 
         private void _interceptor_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (!e.IsRepeat)
-            {
-                var key = e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key;
+            var key = e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key;
 
-                Text += key.ToString() + " UP ";
-            }
+            Text += key.ToString() + " UP ";
+            
         }
 
         private void _interceptor_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if(!e.IsRepeat)
-            {
-                var key = e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key;
+            var key = e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key;
 
-                Text += key.ToString() + " DN ";
-            }
+            Text += key.ToString() + " DN ";
+            
         }
 
-        public void BlockWindowsHandling()
+        public void StartCapture()
         {
             _interceptor.StartCapturing();
         }
 
-        public void UnblockWindowsHandling()
+        public void StopCapture()
         {
             _interceptor.StopCapturing();
         }

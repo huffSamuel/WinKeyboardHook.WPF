@@ -28,12 +28,12 @@ namespace AobD.WinKeyboardHook.Demo
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).BlockWindowsHandling();
+            (DataContext as MainViewModel).StartCapture();
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            (DataContext as MainViewModel).UnblockWindowsHandling();
+            (DataContext as MainViewModel).StopCapture();
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
