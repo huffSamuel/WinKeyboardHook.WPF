@@ -2,6 +2,9 @@
 ---
 A .NET managed wrapper for low-level keyboard events.
 
+
+[![Nuget](https://img.shields.io/nuget/v/AoBD.WinKeyboardHook.WPF.svg)](https://www.nuget.org/packages/AobD.WinKeyboardHook.WPF/)
+
 ## Goals
 This project was adapted from [Open.WinKeyboardHook](https://github.com/lontivero/Open.WinKeyboardHook) and intends to remove dependencies on Windows.Forms and offer some additional features.
 
