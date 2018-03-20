@@ -1,0 +1,19 @@
+﻿<Window x:Class="AobD.WinKeyboardHook.Demo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AobD.WinKeyboardHook.Demo"
+        mc:Ignorable="d"
+        MouseDown="Window_MouseDown"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel VerticalAlignment="Top">
+        <TextBlock Text="Input: " Margin="4" Height="20"/>
+        <TextBox Margin="4" MinWidth="200" Height="200" IsReadOnly="True" 
+                 Name="uxText"
+                 Text="{Binding Text, Mode=OneWay}"
+                 TextWrapping="Wrap"
+                 GotKeyboardFocus="TextBox_GotFocus"
+                 LostKeyboardFocus="TextBox_LostFocus"/>
+    </StackPanel>
+</Window>
