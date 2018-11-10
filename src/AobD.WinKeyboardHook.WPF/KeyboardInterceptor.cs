@@ -31,6 +31,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace AobD.WinKeyboardHook.WPF
 {
@@ -168,7 +169,7 @@ namespace AobD.WinKeyboardHook.WPF
                 }
 
                 var eventArgs = new KeyEventArgs(Keyboard.PrimaryDevice,
-                                                 Keyboard.PrimaryDevice.ActiveSource,
+                                                 Keyboard.PrimaryDevice?.ActiveSource ?? new HwndSource(0, 0, 0, 0, 0, "", IntPtr.Zero),
                                                  keyInfo.time,
                                                  key);
 
