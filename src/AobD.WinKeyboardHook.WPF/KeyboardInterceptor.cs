@@ -88,6 +88,11 @@ namespace AobD.WinKeyboardHook.WPF
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern short GetAsyncKeyState(Key key);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        private static extern int GetWindowThreadProcessId(IntPtr handle, out int pid);
         #endregion
 
         public event EventHandler<KeyEventArgs> KeyDown;
@@ -144,6 +149,21 @@ namespace AobD.WinKeyboardHook.WPF
             return isRepeat;
         }
 
+        private bool ApplicationHasFocus()
+        {
+            IntPtr activatedWindowHandle = GetForegroundWindow();
+
+            if(activatedWindowHandle == IntPtr.Zero)
+            {
+                return false;
+            }
+
+            GetWindowThreadProcessId(activatedWindowHandle, out int pid);
+
+            return pid == Process.GetCurrentProcess().Id;
+
+        }
+
         private IntPtr KeyboardHandler(int nCode, IntPtr wParam, IntPtr lParam)
         {
             if(nCode >= 0)
@@ -151,6 +171,11 @@ namespace AobD.WinKeyboardHook.WPF
                 KBDLLHOOKSTRUCT keyInfo = (KBDLLHOOKSTRUCT)Marshal.PtrToStructure(lParam, typeof(KBDLLHOOKSTRUCT));
 
                 var key = KeyInterop.KeyFromVirtualKey(keyInfo.key);
+
+                if(!ApplicationHasFocus())
+                {
+                    return CallNextHookEx(ptrHook, nCode, wParam, lParam);
+                }
 
                 if(DisableRepeat && IsRepeat(keyInfo))
                 {
